@@ -1,0 +1,175 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Abhinav-K-L/ESP32-TCP-Server/blob/main/shannon_entropy%20of%20diseased%20speech%20signal\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 824
+        },
+        "id": "cfMhGSbW8mcy",
+        "outputId": "53cc016e-7f58-4e90-8bd5-0d00be40c192"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Drive already mounted at /content/drive; to attempt to forcibly remount, call drive.mount(\"/content/drive\", force_remount=True).\n",
+            "✅ Data Loaded. Shape: (6, 20)\n",
+            "     D1.WAV    D2.wav    D3.wav    D4.wav    D5.wav    D6.wav    D7.wav  \\\n",
+            "0  7.861853  7.785613  6.752303  6.691143  7.908653  7.887284  7.840476   \n",
+            "1  5.909623  7.120949  6.201915  6.364686  7.222591  2.380108  7.242194   \n",
+            "2       NaN  6.428958  5.300892  5.553283  6.248090       NaN  5.230535   \n",
+            "3       NaN  5.305290  4.522311  4.595260  4.476548       NaN       NaN   \n",
+            "4       NaN  3.984253  4.998133  4.661481  4.260710       NaN       NaN   \n",
+            "\n",
+            "     D8.wav    D9.wav   D10.wav   D11.wav   D12.wav   D13.wav   D14.wav  \\\n",
+            "0  7.920597  7.937774  7.908972  6.650354  6.830419  7.552952  7.857017   \n",
+            "1  7.029194  7.168938  7.027648  5.973093  6.387654  7.391172  6.110757   \n",
+            "2  6.436022  6.255275  6.408348  5.739614  5.559608  6.519039       NaN   \n",
+            "3  5.348870  4.543862  5.531410  4.823496  4.434594  4.524545       NaN   \n",
+            "4  2.772773  4.066433  3.822080  4.039415  4.885602  4.050592       NaN   \n",
+            "\n",
+            "    D15.wav   D16.wav   D17.wav   D18.wav   D19.wav   D20.wav  \n",
+            "0  6.650401  7.911415  7.307593  7.834446  6.763487  6.645845  \n",
+            "1  6.546207  5.887503  6.354720  5.601837  6.174374  6.421857  \n",
+            "2  6.274419  6.255583  5.436582       NaN  4.907629  5.675650  \n",
+            "3  5.451182  2.385298  5.200225       NaN  4.642930  4.400946  \n",
+            "4  4.357794       NaN       NaN       NaN  4.320900  4.439131  \n",
+            "✅ Added Shannon Entropy Column\n"
+          ]
+        },
+        {
+          "output_type": "error",
+          "ename": "ValueError",
+          "evalue": "Input X contains NaN.\nKNeighborsClassifier does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradientBoostingClassifier and Regressor which accept missing values encoded as NaNs natively. Alternatively, it is possible to preprocess the data, for instance by using an imputer transformer in a pipeline or drop samples with missing values. See https://scikit-learn.org/stable/modules/impute.html You can find a list of all estimators that handle NaN values at the following page: https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mValueError\u001b[0m                                Traceback (most recent call last)",
+            "\u001b[0;32m/tmp/ipython-input-684507763.py\u001b[0m in \u001b[0;36m<cell line: 0>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     60\u001b[0m \u001b[0;31m# ==========================\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     61\u001b[0m \u001b[0mknn\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mKNeighborsClassifier\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mn_neighbors\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m3\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 62\u001b[0;31m \u001b[0mknn\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mfit\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mX_train\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my_train\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     63\u001b[0m \u001b[0my_pred_knn\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mknn\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mpredict\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mX_test\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     64\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/sklearn/base.py\u001b[0m in \u001b[0;36mwrapper\u001b[0;34m(estimator, *args, **kwargs)\u001b[0m\n\u001b[1;32m   1387\u001b[0m                 )\n\u001b[1;32m   1388\u001b[0m             ):\n\u001b[0;32m-> 1389\u001b[0;31m                 \u001b[0;32mreturn\u001b[0m \u001b[0mfit_method\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mestimator\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m*\u001b[0m\u001b[0margs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwargs\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1390\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1391\u001b[0m         \u001b[0;32mreturn\u001b[0m \u001b[0mwrapper\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/sklearn/neighbors/_classification.py\u001b[0m in \u001b[0;36mfit\u001b[0;34m(self, X, y)\u001b[0m\n\u001b[1;32m    237\u001b[0m             \u001b[0mThe\u001b[0m \u001b[0mfitted\u001b[0m \u001b[0mk\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0mnearest\u001b[0m \u001b[0mneighbors\u001b[0m \u001b[0mclassifier\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    238\u001b[0m         \"\"\"\n\u001b[0;32m--> 239\u001b[0;31m         \u001b[0;32mreturn\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m_fit\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mX\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    240\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    241\u001b[0m     \u001b[0;32mdef\u001b[0m \u001b[0mpredict\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mX\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/sklearn/neighbors/_base.py\u001b[0m in \u001b[0;36m_fit\u001b[0;34m(self, X, y)\u001b[0m\n\u001b[1;32m    476\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0mself\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0m__sklearn_tags__\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mtarget_tags\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mrequired\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    477\u001b[0m             \u001b[0;32mif\u001b[0m \u001b[0;32mnot\u001b[0m \u001b[0misinstance\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mX\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m(\u001b[0m\u001b[0mKDTree\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mBallTree\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mNeighborsBase\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 478\u001b[0;31m                 X, y = validate_data(\n\u001b[0m\u001b[1;32m    479\u001b[0m                     \u001b[0mself\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    480\u001b[0m                     \u001b[0mX\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py\u001b[0m in \u001b[0;36mvalidate_data\u001b[0;34m(_estimator, X, y, reset, validate_separately, skip_check_array, **check_params)\u001b[0m\n\u001b[1;32m   2959\u001b[0m             \u001b[0my\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mcheck_array\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0my\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0minput_name\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;34m\"y\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mcheck_y_params\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   2960\u001b[0m         \u001b[0;32melse\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-> 2961\u001b[0;31m             \u001b[0mX\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mcheck_X_y\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mX\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mcheck_params\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   2962\u001b[0m         \u001b[0mout\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mX\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0my\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   2963\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py\u001b[0m in \u001b[0;36mcheck_X_y\u001b[0;34m(X, y, accept_sparse, accept_large_sparse, dtype, order, copy, force_writeable, force_all_finite, ensure_all_finite, ensure_2d, allow_nd, multi_output, ensure_min_samples, ensure_min_features, y_numeric, estimator)\u001b[0m\n\u001b[1;32m   1368\u001b[0m     \u001b[0mensure_all_finite\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0m_deprecate_force_all_finite\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mforce_all_finite\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mensure_all_finite\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1369\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-> 1370\u001b[0;31m     X = check_array(\n\u001b[0m\u001b[1;32m   1371\u001b[0m         \u001b[0mX\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1372\u001b[0m         \u001b[0maccept_sparse\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0maccept_sparse\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py\u001b[0m in \u001b[0;36mcheck_array\u001b[0;34m(array, accept_sparse, accept_large_sparse, dtype, order, copy, force_writeable, force_all_finite, ensure_all_finite, ensure_non_negative, ensure_2d, allow_nd, ensure_min_samples, ensure_min_features, estimator, input_name)\u001b[0m\n\u001b[1;32m   1105\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1106\u001b[0m         \u001b[0;32mif\u001b[0m \u001b[0mensure_all_finite\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-> 1107\u001b[0;31m             _assert_all_finite(\n\u001b[0m\u001b[1;32m   1108\u001b[0m                 \u001b[0marray\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1109\u001b[0m                 \u001b[0minput_name\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0minput_name\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py\u001b[0m in \u001b[0;36m_assert_all_finite\u001b[0;34m(X, allow_nan, msg_dtype, estimator_name, input_name)\u001b[0m\n\u001b[1;32m    118\u001b[0m         \u001b[0;32mreturn\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    119\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 120\u001b[0;31m     _assert_all_finite_element_wise(\n\u001b[0m\u001b[1;32m    121\u001b[0m         \u001b[0mX\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    122\u001b[0m         \u001b[0mxp\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mxp\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py\u001b[0m in \u001b[0;36m_assert_all_finite_element_wise\u001b[0;34m(X, xp, allow_nan, msg_dtype, estimator_name, input_name)\u001b[0m\n\u001b[1;32m    167\u001b[0m                 \u001b[0;34m\"#estimators-that-handle-nan-values\"\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    168\u001b[0m             )\n\u001b[0;32m--> 169\u001b[0;31m         \u001b[0;32mraise\u001b[0m \u001b[0mValueError\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mmsg_err\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    170\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    171\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mValueError\u001b[0m: Input X contains NaN.\nKNeighborsClassifier does not accept missing values encoded as NaN natively. For supervised learning, you might want to consider sklearn.ensemble.HistGradientBoostingClassifier and Regressor which accept missing values encoded as NaNs natively. Alternatively, it is possible to preprocess the data, for instance by using an imputer transformer in a pipeline or drop samples with missing values. See https://scikit-learn.org/stable/modules/impute.html You can find a list of all estimators that handle NaN values at the following page: https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values"
+          ]
+        }
+      ],
+      "source": [
+        "# ==================================\n",
+        "# STEP 1: Install Required Libraries\n",
+        "# ==================================\n",
+        "!pip install --quiet librosa openpyxl\n",
+        "\n",
+        "# ==================================\n",
+        "# STEP 2: Import Libraries\n",
+        "# ==================================\n",
+        "import os\n",
+        "import numpy as np\n",
+        "import librosa\n",
+        "import pandas as pd\n",
+        "import pywt\n",
+        "from scipy.stats import entropy\n",
+        "\n",
+        "# ==================================\n",
+        "# STEP 3: Mount Google Drive\n",
+        "# ==================================\n",
+        "from google.colab import drive\n",
+        "drive.mount('/content/drive')\n",
+        "\n",
+        "# ==================================\n",
+        "# STEP 4: Define Paths for 25 Audio Files\n",
+        "# ==================================\n",
+        "file_paths = []\n",
+        "for i in range(1, 61):\n",
+        "    path = f\"/content/drive/MyDrive/D{i}.wav\"\n",
+        "    if os.path.exists(path):\n",
+        "        file_paths.append(path)\n",
+        "    else:\n",
+        "        print(f\"⚠ Skipping missing file: {path}\")\n",
+        "\n",
+        "print(f\"✅ Found {len(file_paths)} audio files\")\n",
+        "\n",
+        "# ==================================\n",
+        "# STEP 5: Feature Extraction Functions\n",
+        "# ==================================\n",
+        "def calculate_entropy(signal):\n",
+        "    \"\"\" Shannon entropy from histogram \"\"\"\n",
+        "    hist, _ = np.histogram(signal, bins=50, density=True)\n",
+        "    hist = hist[hist > 0]  # remove zeros\n",
+        "    return entropy(hist)\n",
+        "\n",
+        "def process_file(file_path, duration=3, max_level=5):\n",
+        "    \"\"\"Process one audio file and extract features\"\"\"\n",
+        "    print(f\"🔍 Processing {file_path} ...\")\n",
+        "\n",
+        "    # Load first 3 seconds of audio\n",
+        "    signal, sr = librosa.load(file_path, sr=None, duration=duration)\n",
+        "\n",
+        "    # Wavelet Decomposition (db4 wavelet)\n",
+        "    coeffs = pywt.wavedec(signal, 'db4', level=max_level)\n",
+        "\n",
+        "    # Extract entropy features for each level\n",
+        "    features = {}\n",
+        "    for i, c in enumerate(coeffs):\n",
+        "        features[f\"Level{i+1}_Entropy\"] = calculate_entropy(c)\n",
+        "        features[f\"Level{i+1}_ShannonEntropy\"] = -np.sum(c * np.log(np.abs(c) + 1e-12))\n",
+        "\n",
+        "    return features\n",
+        "\n",
+        "# ==================================\n",
+        "# STEP 6: Process All Files\n",
+        "# ==================================\n",
+        "results = []\n",
+        "for file_path in file_paths:\n",
+        "    try:\n",
+        "        features = process_file(file_path)\n",
+        "        features[\"File\"] = os.path.basename(file_path)\n",
+        "        results.append(features)\n",
+        "    except Exception as e:\n",
+        "        print(f\"❌ Error processing {file_path}: {e}\")\n",
+        "\n",
+        "# ==================================\n",
+        "# STEP 7: Save to Excel\n",
+        "# ==================================\n",
+        "df = pd.DataFrame(results)\n",
+        "output_path = \"/content/drive/MyDrive/Wavelet_entropy_features.xlsx\"\n",
+        "df.to_excel(output_path, index=False)\n",
+        "\n",
+        "print(f\"\\n✅ Feature extraction completed! Results saved to {output_path}\")"
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPwAHl64DfQDKca7qZ/nNxd",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
